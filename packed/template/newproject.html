@@ -1,0 +1,50 @@
+<html>
+    <body>
+      <center>
+        <img src="https://cdn.shopify.com/s/files/1/0721/6227/t/21/assets/logo.png?227" width="300" height="100">
+      <!-- <marquee scrollamount="0"><img src="https://cdn.shopify.com/s/files/1/0721/6227/t/21/assets/logo.png?227" width="300" height="100"></marquee> -->
+      </center>
+    <h1><strong> Add a new product here! </strong></h1>
+        <form name = "proj" action = "{% url "add_project" %}"
+              method = "POST" >{% csrf_token %}
+
+
+
+ <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Product Code</th>
+                    <th>Product Name</th>
+                    <th>Box type name</th>
+                    <th>Box type number</th>
+                    <th>One piece weight</th>
+                    <th>Empty Carton Weight</th>
+                    <th>Box 1 Size</th>
+                    <th>Box 2 Size</th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td><input type="number" name="code" required></td>
+                <td><input type="text" name="pname" required></td>
+                <td><input type="text" name="type_name" required></td>
+                <td><input type="number" name="no." required></td>
+                <td><input type="number" name="single_wt" required></td>
+                <td><input type="number" name="carton_wt" required></td>
+                <td><input type="text" name="dimension1" required></td>
+                <td><input type="text" name="dimension2" required></td>
+            </tr>
+            </tbody>
+ </table>
+ <div class="field">
+                <div class="one wide field">
+                    <input type="submit" value="Submit" class="ui primary button" />
+                </div>
+ </div>
+
+
+
+    </body>
+</html>

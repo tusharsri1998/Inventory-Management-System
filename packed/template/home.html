@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  Hi {{ request.user }}!
+  <marquee scrollamount="5"><img src="https://cdn.shopify.com/s/files/1/0721/6227/t/21/assets/logo.png?227" width="300" height="100"></marquee>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}

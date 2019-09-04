@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+
+  <script language="javascript">
+
+    function deleteRow(row) {
+          var i = row.parentNode.parentNode.rowIndex;
+          document.getElementById('table').deleteRow(i);
+        }
+
+    counter = 1;
+    function addrow(){
+    counter++;
+    var row = document.getElementById("row_cp1");
+    var clone = row.cloneNode(true);
+    clone.id = 'row_cp'+counter;
+    document.getElementById("table").appendChild(clone);
+    var inp2 = clone.cells[1].getElementsByTagName('input')[0];
+    inp2.id += counter;
+    inp2.value = '';
+  }
+
+  </script>
+
+ <p>
+      Hi {{ request.user }}
+    </p>
+    <center><h3> Today's Date  <script> document.write(new Date().toLocaleDateString()); </script></h3>
+      </center>
+      <marquee scrollamount="5"><img src="https://cdn.shopify.com/s/files/1/0721/6227/t/21/assets/logo.png?227" width="300" height="100"></marquee>
+      <form name = "form"  id = 'data_send' action = "{% url "data_test" %}"
+         method = "POST" >{% csrf_token %}
+         <!-- <div class="col-sm-3" style="background-color:lavender;">
+         <p><strong>Boxes available STEM 2</strong></p>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="1" name="checks">6pc Box
+          </label>
+          <label class="checkbox-inline">
+            <input type="checkbox" value="2" name="checks">7pc Box
+          </label>
+          <br>
+          <br>
+          <p><strong>Boxes available STEM other Tinkerer</strong></p>
+           <label class="checkbox-inline">
+             <input type="checkbox" value="3" name="checks">6pc Box
+           </label>
+           <label class="checkbox-inline">
+             <input type="checkbox" value="4" name="checks">7pc Box
+           </label>
+           <br>
+           <br>
+           <p><strong>Boxes available STEM big</strong></p>
+            <label class="checkbox-inline">
+              <input type="checkbox" value="5" name="checks">3pc Box
+            </label>
+            <label class="checkbox-inline">
+              <input type="checkbox" value="6" name="checks">4pc Box
+            </label>
+            <br>
+            <br>
+            <p><strong>Boxes available STEM small</strong></p>
+             <label class="checkbox-inline">
+               <input type="checkbox" value="7" name="checks">6pc Box
+             </label>
+             <label class="checkbox-inline">
+               <input type="checkbox" value="8" name="checks">7pc Box
+             </label>
+             <br>
+             <br>
+             <p><strong>Boxes available STEM mini</strong></p>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="9" name="checks">12pc Box
+              </label>
+              <label class="checkbox-inline">
+                <input type="checkbox" value="10" name="checks">13pc Box
+              </label>
+              <br>
+              <br>
+              <p><strong>Boxes available STEM other Propulsion Car</strong></p>
+               <label class="checkbox-inline">
+                 <input type="checkbox" value="11" name="checks">6pc Box
+               </label>
+               <label class="checkbox-inline">
+                 <input type="checkbox" value="12" name="checks">7pc Box
+               </label>
+               <br>
+               <br>
+               <p><strong>Boxes available STEM Other Princess Castle</strong></p>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="13" name="checks">3pc Box
+                </label>
+                <label class="checkbox-inline">
+                  <input type="checkbox" value="14" name="checks">4pc Box
+                </label>
+                <br>
+                <br>
+                <p><strong>Boxes available STEM other Dragon Coaster</strong></p>
+                 <label class="checkbox-inline">
+                   <input type="checkbox" value="15" name="checks">3pc Box
+                 </label>
+                 <label class="checkbox-inline">
+                   <input type="checkbox" value="16" name="checks">4pc Box
+                 </label>
+                 <br>
+                 <br>
+                 </div> -->
+                 <div class="col-sm-12" style="background-color:lavender;">
+                   <center>
+                <table id="table" width="50%" cellpadding="0" cellspacing="0" class="pdzn_tbl1" border="#729111 1px solid">
+                      <tr>
+                          <th align="center">SKU</th>
+                          <th align="center">Quantity</th>
+                          <th align="center">Available type</th>
+                          <!-- <th align="center">Box type</th>
+                          <th align="center">Invoice No.</th>
+                          <th align="center">Invoice Date</th> -->
+
+                      </tr>
+                      <tr id="row_cp1">
+                          <div style="padding-left: 5px">
+                              <td style="padding:5px;">
+
+
+                                <select class="code" required, name = 'code', id = 'code' >
+                                        <option value=""></option>
+                                        {% for i in product %}
+                                        <option value="{{ i.p_id }}">{{i.p_id}}</option>
+                                        {% endfor%}
+                                    </select>
+                              </td>
+
+                              <td style="padding:5px;">
+                                    <input type="number" class = 'qty' name="quantity" required, id ="quantity", min = "1" >
+                              </td>
+                              <td style="padding:5px;">
+                                <select class="type" name="box_type" id ="yo">
+                                  <option selected="selected"></option>
+                                  <option value="both">both</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <!-- <option value="10">10</option> -->
+                                  <option value="12">12</option>
+                                  <option value="13">13</option>
+                                </select>
+                              <td>
+                                <input type="button" value="Add Row" onclick="addrow()" />
+                              </td>
+                              <td>
+                                <input type="button" id="delPOIbutton" value="Delete" onclick="deleteRow(this)" />
+                              </td>
+
+                          </div>
+                      </tr>
+                  </table>
+
+
+                <button style = "border:0px; background-color:#4285F4; margin-top:8%;
+                   height:35px; width:30%;margin-left:5%;" type = "submit"
+                   value = "Submit" , id = "submit" >
+                   <strong>Submit</strong>
+                </button>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p><strong>To add a new Product click on the link below</strong></p>
+                <a href="{% url 'new_project' %}"><font size="4">Add new Product</font></a>
+              </center>
+              </div>
+                                </form>
+
+
+ </body>
+</html>
